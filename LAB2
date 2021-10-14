@@ -1,0 +1,57 @@
+// LAB2.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <vector>
+#include <iostream>
+#include <iomanip>
+#include <random>
+#include <numeric>		// for inner product
+
+using std::cout;
+using std::cin;
+using std::endl;
+using VD = std::vector<double>;
+
+auto	CreateRandomVector(const double kFrom, const double kTo, const int kNumOfTrials)					-> std::vector< double >
+{
+	// To generate random values we need:
+	// (1) a random initialization object
+	std::random_device rd;
+	// (2) a random engine 
+	std::mt19937 mtRandomEngine(rd());	// Mersenne twister MT19937? Why not?
+	// (3) a distribution
+	std::uniform_real_distribution<double> uni_distr(kFrom, kTo);		// values between from_val and to_val
+
+	std::vector< double >	random_decimals;	// will hold random integers
+
+	// Generate kNumOfTrials random values through the lambda function joining 
+	// uni_distr with mtRandomEngine. We use back_inserter since vector is empty.
+	std::generate_n(back_inserter(random_decimals), kNumOfTrials, [&]() { return uni_distr(mtRandomEngine); });
+
+	return random_decimals;
+}
+
+int main()
+{
+	VD a, b, wynik;
+	const int temp1 = 0;
+	const int temp2 = 10;
+	a = CreateRandomVector(temp1, temp2, 10);
+	b = CreateRandomVector(temp1, temp2, 10);
+	for (size_t i = 0; i < 11; i++)
+	{
+		wynik[i] = a[i] * b[i];
+		cout << wynik[i];
+	}
+}
+
+// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
+// Debug program: F5 or Debug > Start Debugging menu
+
+// Tips for Getting Started: 
+//   1. Use the Solution Explorer window to add/manage files
+//   2. Use the Team Explorer window to connect to source control
+//   3. Use the Output window to see build output and other messages
+//   4. Use the Error List window to view errors
+//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
+//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
