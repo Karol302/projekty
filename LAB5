@@ -1,0 +1,52 @@
+//to jest dobudówka do kodu z poprzednich zajęć
+#include <iostream>
+#include <vector>
+#include <fstream>
+
+using std::vector, std::string, std::cout, std::cin, std::ostream, std::istream, std::ofstream;
+
+class Record {
+public:
+    int a{};
+    Record(int v=0) {
+        a = v;
+    }
+    string name{};
+    int wiek{};
+};
+
+ostream& operator << (ostream& o, Record& obj) {
+
+    o << obj.a;
+    return o;
+}
+
+istream& operator >> (istream& i, Record& obj) {
+
+    i >> obj.a;
+    return i;
+}
+
+Record r;
+using RecVec = vector<Record>;
+RecVec db;
+std::ofstream file("tekst.txt");
+
+auto write(std::ostream& o, Record& r) {
+    o << r.name << "\t" << r.wiek << "\n";
+    return 0;
+}
+
+
+int main()
+{
+    Record myObj(7);
+    cout << myObj;
+    ofstream f("plik.txt");
+    f << myObj;
+
+    //db.push_back(r);
+
+    //cout << db[0].name << " " << db[0].wiek << "\n";
+    
+}
